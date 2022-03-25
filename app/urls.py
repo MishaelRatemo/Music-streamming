@@ -4,6 +4,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('post/song', views.song_post, name='new_song'),
+    
+    path('logout', views.logout, name='logout'),
+    
     
      # API VIWS Get
     path('getalbums/', views.get_album),

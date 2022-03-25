@@ -1,12 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Welcome</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="felx_content row">
+  <div class="col-3">
+    {% include 'sidebar.html' %}
+  </div>
+  <div class="col-9">
+    <div class="searchbar">
+      <div class="form-group">
+        <input type="search" name="searchitem" id="searchitem" class="form-control" placeholder="Search Music">
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary">
+      </div>
+    </div>
+
+     <div class="d-flex justify-content-around">
+      {% for music in musics %}
+            <div class="card" style="width: 20rem;">
+              <div class="card-body">       
+                <div style=" width:18rem; height:18rem" >
+                    <img src="{{ music.album_cover.url }}" height="100%" width="100%" class="card-img-top fl" alt="...">
+                </div>
+                  <audio controls>
+                    <source src="../../media/{{ music.song_item }}"  type="audio/mp3">
+                    <source src="{{ music.song_item.url }}" type="audio/mp3">
+                  Your browser does not support the audio element.
+                  </audio>
+            
+                <p class="card-text"> {{music.description}} </p>
+              </div>
+            </div>
+      {% endfor %}
+     </div>
+
+    
+    </div>
+  </div>
+</div>
+{% endblock %}

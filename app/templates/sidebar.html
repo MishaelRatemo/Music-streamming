@@ -1,0 +1,99 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <i class="fa-solid fa-2x mr-2 fa-music"></i>
+        <span class="fs-4">Mmusic</span>
+      </a>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" aria-current="page">
+            <i class="fa-solid fa-house-chimney-crack"></i>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <i class="fa-solid fa-compact-disc"></i>
+                 Library
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'new_song' %}" class="nav-link text-white">
+            <i class="fa-solid fa-music"></i>
+            Add Song
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <i class="fa-regular fa-user"></i>
+             Artists
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <i class="fa-solid fa-icons"></i>
+            Genre
+          </a>
+        </li>
+      </ul>
+      <hr>
+      {% if user.is_superuser %}
+      <li class="nav-item">
+          <a class="nav-link" href="/admin">Admin</a>
+      </li>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="" width="40" height="40" class="rounded-circle me-2">
+          <strong>mdo</strong>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" href=""><i class="fa-solid fa-id-card"></i>Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Sign out</a></li>
+          {% else %}
+          <li class="nav-item">
+              <a class="nav-link" href="/accounts/login">Sign In</a>
+          </li>
+          {% endif %}
+        </ul>
+
+      </div>
+    </div>
+  
+<!-- <div class="navbar">
+  <ul>
+    <li class="nav-item">
+      <a href="#" class="nav-link active" aria-current="page">
+        <i class="fa-solid fa-house-chimney-crack"></i>
+        Home
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link text-white">
+        <i class="fa-solid fa-compact-disc"></i>
+             Library
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'new_song' %}" class="nav-link text-black">
+        <i class="fa-solid fa-music"></i>
+        Add Song
+      </a>
+
+    </li>
+    <li>
+      <a href="#" class="nav-link text-white">
+        <i class="fa-regular fa-user"></i>
+         Artists
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link text-white">
+        <i class="fa-solid fa-icons"></i>
+        Genre
+      </a>
+    </li>
+  </ul>
+</div> -->

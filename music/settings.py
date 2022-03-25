@@ -86,6 +86,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME':'musicstream',
+        # 'USER':'moringa',
+        # 'PASSWORD':'Access',
     }
 }
 
@@ -136,3 +139,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL= 'profile'
 
+
+SECRET_KEY='django-insecure-c66(#wq*8$&2y3$t$yo+$xbc6%wz&33=4(j%kg$+ru78@q@#rl'
+ACCOUNT_ACTIVATION_DAYS=1
+DEFAULT_FROM_EMAIL='mishymmoringa@gmail.com'
+EMAIL_HOST_PASSWORD='@Mypassword'
+EMAIL_HOST_USER='mishymmoringa@gmail.com'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+
+
+cloudinary.config(
+    cloud_name='mishmish',
+    api_key='739237125342173',
+    api_secret='0m3FpTW7VNcn3l6_bcja3ztpscw',
+)
