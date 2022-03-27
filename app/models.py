@@ -3,6 +3,7 @@ from tinymce.models import HTMLField
 from django.contrib.auth.models import  User
 from cloudinary.models import CloudinaryField
 from django.core.validators import MaxValueValidator
+from django.db.models.signals import post_save
 
 
 # Register your models here.
@@ -26,6 +27,11 @@ class Profile(models.Model):
     def get_profile_by_id(cls,id):
         profile = Profile.objects.get(user = id)
         return profile
+    def create_profile(sender,**kwargs):
+        if kwargs['created']:
+            user_profile = Profile.objects.create(user=kwargs['instance'])
+
+    post_save.connect(create_profile, sender=User)
     
 class Album(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
