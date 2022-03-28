@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <main class="container">
+
+        <div class="col-md-6">
+            {{user.photo.url}}
+            <p>Username: {{user.username}}</p>
+            <p>Fist Name: {{user.first_name}}  {{user.last_name}}</p>            
+            <p> Last Name: {{user.email}}</p>
+            <p>Joined on: {{user.date_joined | date:'D M m Y'}}</p>
+        </div>
+    </main>
+
+{%endblock %}
