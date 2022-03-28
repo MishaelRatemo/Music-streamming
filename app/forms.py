@@ -1,6 +1,24 @@
 
-from .models import Album, Ratings, Review, Profile, Song, User
+from .models import Album, Ratings, Review, Profile, Song
 from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
+from cloudinary.models import CloudinaryField
+
+
+class EditProfileForm(UserChangeForm):
+    photo = CloudinaryField('image')    
+
+    class Meta:
+        model= User        
+        fields= (
+            'email',
+            'first_name',
+            'last_name',
+            'password',
+        )
+
+
 
 class profileForm(forms.ModelForm):
     class Meta:
