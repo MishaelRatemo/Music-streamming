@@ -16,7 +16,7 @@ Account details
     >> Email: {{user.email}}
     >> Account Name: {{user.username}}    
 
-Thanks for becoming part of Us. Get to Know what is going on in your Village.
+Thanks for becoming part of Us. Where word ends Music commences.
 
 
 Regard,
