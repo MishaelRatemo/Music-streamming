@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import  login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import  logout as auth_logout
 from django.contrib import messages
+
+from app.forms import EditProfileForm
+from app.forms import (     EditProfileForm)
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -19,8 +24,21 @@ def index(request):
     }
     return render( request, 'index.html',context)
 
+
+
+
+
+
+
 @login_required(login_url='login')
-def profile(request,userID=None):
+def profile(request):
+    user= request.user
+    context={ 'user': user}
+    return render(request, 'profile.html', context)
+
+
+@login_required(login_url='login')
+def profiles(request,userID=None):
     if userID== None:
         userID=request.user.id
     # current_user= User.objects.get(id=userID)
@@ -32,32 +50,33 @@ def profile(request,userID=None):
     return render(request, 'profile.html', context)
 
 @login_required(login_url='login')
-def create_edit_profile(request, username):
-    # user = User.objects.get(username=username)
-    current_user = request.user  
-    create_profile= Profile.objects.filter(user_id=request.user.id)
-    if create_profile.exists():        
-        if request.method == 'POST':
-            profile_form = profileForm(request.POST, request.FILES)
-            if  profile_form.is_valid():
-                profile_form.save()
-                return redirect('/profile/', current_user)
-        else:        
-            profile_form = profileForm(instance=request.user.profile)       
+def edit_profile(request):
+    user= request.user
+    if  request.method =='POST':
+        form = EditProfileForm( request.POST, instance=user)
+       
+        if form.is_valid():
+            form.save()
+            
+            return redirect ('profile')
     else:
-        if request.method == 'POST':
-            profile_form = profileForm(request.POST, request.FILES)
-            if  profile_form.is_valid():
-                profile_form.save()
-                return redirect('/profile/', current_user)
-        else:        
-            profile_form = profileForm() 
-           
+        form =EditProfileForm(instance=request.user)
+  
     context = {
-        'prof_form': profile_form, 
-        'current_user': current_user
+        'form': form,
+        
+        'user': user
     }
     return render(request, 'profile_edit.html', context)
+
+
+
+
+
+
+
+
+
 
 def song_post(request):
     current_user = request.user
