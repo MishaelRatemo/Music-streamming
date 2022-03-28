@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+
+{% block content %}
+<!-- {% include 'sidebar.html' %} -->
+
+    <main class="container">
+        <form  method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            
+            <input type="submit"  class="btn btn-success" value="Update">
+        </form>
+    </main>
+{% endblock %}
