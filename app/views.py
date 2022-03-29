@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import  login_required
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm
+    
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import  logout as auth_logout
 from django.contrib import messages
 
 from app.forms import EditProfileForm
-from app.forms import (     EditProfileForm)
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -68,9 +69,22 @@ def edit_profile(request):
         'user': user
     }
     return render(request, 'profile_edit.html', context)
-
-
-
+# if user remembers the password
+def change_password(request):
+    user = request.user
+    if  request.method =='POST':
+        form = PasswordChangeForm( data=request.POST, user=user)       
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user) # this will prevent user from being logged out after changing the pass
+            return redirect('profile')
+        else: # redirect the user if the form is not valid
+            return redirect('change-password')
+    else:
+        form = PasswordChangeForm(user=user)
+        context ={'form': form}
+        return render(request, 'change_pass.html', context)
+        
 
 
 
